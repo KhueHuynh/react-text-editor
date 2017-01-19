@@ -31,8 +31,7 @@ module.exports = {
     ]
   },
   externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM'
+    'react': 'React'
   },
   output: {
     path: path.resolve('./dist'),

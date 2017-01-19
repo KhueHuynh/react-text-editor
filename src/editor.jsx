@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import { Editor as DraftEditor, EditorState, RichUtils, Modifier, convertToRaw, convertFromRaw, CompositeDecorator } from 'draft-js';
 import { COLOR_CONFIG_EDITOR, LIST_COLORS } from './styleConfig';
