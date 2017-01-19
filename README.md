@@ -17,7 +17,7 @@ It have some basic control: heading, font style(italic, bolde, underline, clor),
 
 ## Loading Css
 
-Link github: https://github.com/KhueHuynh/react-text-editor/blob/master/dist/style.css
+Link github: https://raw.githubusercontent.com/KhueHuynh/react-text-editor/master/dist/style.css
 
 ## License
 

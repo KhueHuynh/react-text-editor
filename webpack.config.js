@@ -31,7 +31,8 @@ module.exports = {
     ]
   },
   externals: {
-    'react': 'React'
+    'react': 'react',
+    'react-dom': 'react-dom'
   },
   output: {
     path: path.resolve('./dist'),
@@ -44,16 +45,16 @@ module.exports = {
     new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      mangle: false,
-      optimize: true,
-      output: {
-        comments: false
-      },
-      compress: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: false,
+    //   mangle: false,
+    //   optimize: true,
+    //   output: {
+    //     comments: false
+    //   },
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ]
 };
