@@ -1,0 +1,129 @@
+/*!
+ * Define button control styles
+ * Copyright (c) 2015 Pimmor
+ */
+.text-editor {
+  background-color: #f4f4f4;
+  padding: 0 10px 5px 10px; }
+  .text-editor .editor-heading {
+    padding-left: 70px; }
+    .text-editor .editor-heading .group-control {
+      display: inline-block;
+      padding: 2px 5px; }
+    .text-editor .editor-heading .text-heading {
+      width: 130px;
+      position: relative;
+      border-right: 1px solid #999999; }
+      .text-editor .editor-heading .text-heading-selected {
+        height: 22px; }
+        .text-editor .editor-heading .text-heading-selected:after {
+          content: '\F0DD';
+          font-family: 'FontAwesome';
+          margin-left: 20px; }
+        .text-editor .editor-heading .text-heading-selected:hover {
+          cursor: default; }
+      .text-editor .editor-heading .text-heading__options {
+        display: none;
+        border: 1px solid #eaeaea;
+        z-index: 2;
+        position: absolute;
+        top: 22px;
+        left: 0; }
+        .text-editor .editor-heading .text-heading__options .heading-item {
+          padding: 5px 2px;
+          background: #ffffff;
+          border-bottom: 1px solid #eaeaea; }
+          .text-editor .editor-heading .text-heading__options .heading-item:hover {
+            cursor: default; }
+        .text-editor .editor-heading .text-heading__options .header-one {
+          font-weight: 600;
+          font-size: 24px; }
+        .text-editor .editor-heading .text-heading__options .header-two {
+          font-weight: 600;
+          font-size: 21px; }
+        .text-editor .editor-heading .text-heading__options .header-three {
+          font-weight: 600;
+          font-size: 18px; }
+        .text-editor .editor-heading .text-heading__options .header-four {
+          font-weight: 400;
+          font-size: 16px; }
+        .text-editor .editor-heading .text-heading__options .header-five {
+          font-weight: 200;
+          font-size: 15px; }
+        .text-editor .editor-heading .text-heading__options .header-six {
+          font-weight: 200;
+          font-size: 14px; }
+      .text-editor .editor-heading .text-heading.focus .text-heading__options {
+        display: block; }
+    .text-editor .editor-heading .inline-style {
+      border-right: 1px solid #999999; }
+      .text-editor .editor-heading .inline-style__options {
+        padding: 2px 15px;
+        display: inline-block;
+        border: 1px solid #f4f4f4; }
+        .text-editor .editor-heading .inline-style__options.selected {
+          background-color: rgba(0, 0, 0, 0.2);
+          border: 1px solid #bababa; }
+        .text-editor .editor-heading .inline-style__options:hover {
+          border: 1px solid #bababa; }
+      .text-editor .editor-heading .inline-style__color {
+        display: inline-block;
+        position: relative;
+        width: 40px; }
+        .text-editor .editor-heading .inline-style__color__wrapper {
+          @extends .inline-style__options; }
+          .text-editor .editor-heading .inline-style__color__wrapper:after {
+            content: '\F0DD';
+            font-family: 'FontAwesome';
+            margin-left: 5px; }
+          .text-editor .editor-heading .inline-style__color__wrapper__symbol {
+            width: 20px;
+            padding-bottom: 4px;
+            display: inline-block; }
+            .text-editor .editor-heading .inline-style__color__wrapper__symbol .symbol {
+              padding: 0 5px;
+              background-color: #f4f4f4;
+              font-weight: 600; }
+        .text-editor .editor-heading .inline-style__color-picker-wrapper {
+          position: absolute;
+          background-color: #ffffff;
+          z-index: 2;
+          top: 22px;
+          left: 0; }
+    .text-editor .editor-heading .font-style__options {
+      pointer: cursor;
+      padding: 2px 15px;
+      display: inline-block;
+      border: 1px solid #f4f4f4; }
+      .text-editor .editor-heading .font-style__options.selected {
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 1px solid #bababa; }
+      .text-editor .editor-heading .font-style__options:hover {
+        border: 1px solid #bababa; }
+    .text-editor .editor-heading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0; }
+  .text-editor .text-editor-wrapper {
+    background-color: #ffffff;
+    min-height: 260px; }
+    .text-editor .text-editor-wrapper .text-editor-blockquote {
+      font-style: italic;
+      font-size: inherit;
+      background-color: #f9f9f9;
+      border: none;
+      font-weight: 600;
+      margin-bottom: 10px; }
+    .text-editor .text-editor-wrapper h1,
+    .text-editor .text-editor-wrapper h2,
+    .text-editor .text-editor-wrapper h3,
+    .text-editor .text-editor-wrapper h4,
+    .text-editor .text-editor-wrapper h5,
+    .text-editor .text-editor-wrapper h6 {
+      margin: 0 !important;
+      margin-top: 0 !important; }
+  .text-editor.readonly .text-editor-wrapper {
+    background-color: inherit;
+    min-height: initial; }
