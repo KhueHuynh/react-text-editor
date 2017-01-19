@@ -4,8 +4,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    "editor": "./src/editor.jsx",
-    "style": "./src/_text-editor.scss"
+    editor: "./src/editor.jsx",
+    style: "./src/_text-editor.scss"
   },
   resolve: {
     root: path.join(__dirname, 'src'),
@@ -16,7 +16,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: path.join(__dirname, 'src'),
         query: {
           cacheDirectory: true,
@@ -32,12 +32,12 @@ module.exports = {
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM',
-    'react-dnd': 'ReactDnD'
+    'react-dom': 'ReactDOM'
   },
   output: {
     path: path.resolve('./dist'),
-    filename: 'textEditor.js',
+    filename: '[name].js',
+    chunkFilename: '[id].js',
     libraryTarget: 'umd',
     library: 'Editor'
   },
@@ -45,5 +45,16 @@ module.exports = {
     new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      mangle: false,
+      optimize: true,
+      output: {
+        comments: false
+      },
+      compress: {
+        warnings: false
+      }
+    })
   ]
 };

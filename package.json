@@ -15,11 +15,12 @@
     "LICENSE",
     "PATENTS"
   ],
-  "main": "lib/Draft.js",
+  "main": "dist/editor.js",
   "repository": "KhueHuynh/react-text-editor",
   "license": "BSD-3-Clause",
   "scripts": {
-    "build": "webpack --config webpack.config.js --progress --colors"
+    "build": "webpack --config webpack.config.js --progress --colors",
+    "run": "babel src/editor.jsx --out-file dist/textEditor.js "
   },
   "dependencies": {
     "immutable": "~3.7.4",
