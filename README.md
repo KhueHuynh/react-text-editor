@@ -14,6 +14,21 @@ It have some basic control: heading, font style(italic, bolde, underline, clor),
 
 	import Editor from 'react-text-editor';
 
+## Props:
+- value: {string}
+- placeholder: {string}
+- readOnly: {boolean}
+
+## Get data:
+
+Use refs[REF_EDITOR_NAME].getValue();
+
+### Example
+
+	<Editor ref="textEditor"/>
+
+	this.refs.textEditor.getValue();
+
 
 ## Loading Css
 

@@ -18698,9 +18698,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: '_toggleInlineStyle',
 	    value: function _toggleInlineStyle(style) {
-	      var control = this.state.control;
-	      control[style] = !control[style];
-	      this.setState({ control: control });
 	      this.props.toggleInlineStyle(style);
 	    }
 	  }, {

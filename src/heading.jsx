@@ -35,9 +35,6 @@ class Heading extends React.Component {
   }
 
   _toggleInlineStyle(style) {
-    let control = this.state.control;
-    control[style] = !control[style];
-    this.setState({ control: control });
     this.props.toggleInlineStyle(style);
   }
 
