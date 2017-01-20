@@ -31,11 +31,19 @@ class Heading extends React.Component {
   }
 
   _toggleBlockType(style) {
-    this.props.toggleBlockType(style);
+    return (e) => {
+      e.preventDefault();
+      this.props.toggleBlockType(style);
+    }
+
   }
 
   _toggleInlineStyle(style) {
-    this.props.toggleInlineStyle(style);
+    return (e) => {
+      e.preventDefault();
+      this.props.toggleInlineStyle(style);
+    }
+
   }
 
   _selectHeading(type) {
@@ -47,23 +55,28 @@ class Heading extends React.Component {
     }
   }
 
-  _changeHeading() {
+  _changeHeading(e) {
+    e.preventDefault();
     this.setState({ focusHeadingSelect: !this.state.focusHeadingSelect });
   }
 
-  _selectColor() {
+  _selectColor(e) {
+    e.preventDefault();
     this.setState({ focusColorPicker: !this.state.focusColorPicker });
   }
 
   _changeColorComplete(color) {
-    let colorHex = color.hex,
+    return (e) => {
+      e.preventDefault();
+      let colorHex = color.hex,
         colorCode = colorHex.substring(1);
 
-    this.setState({
-      colorSelected: colorHex,
-      focusColorPicker: !this.state.focusColorPicker
-    });
-    this.props.toggleColor(colorCode);
+      this.setState({
+        colorSelected: colorHex,
+        focusColorPicker: !this.state.focusColorPicker
+      });
+      this.props.toggleColor(colorCode);
+    }
   }
 
   _renderTextHeading(blockStyle) {
@@ -136,20 +149,20 @@ class Heading extends React.Component {
           <CirclePicker
             width="294px"
             colors={COLORS_PICKER}
-            onChangeComplete={this._changeColorComplete.bind(this)}/>
+            onChangeComplete={this._changeColorComplete.call(this)}/>
         </div>
       );
     }
 
     return (
       <div className="inline-style group-control">
-        <div className={bold.className} onMouseDown={this._toggleInlineStyle.bind(this, bold.style)}>
+        <div className={bold.className} onMouseDown={this._toggleInlineStyle.call(this, bold.style)}>
           <i className="fa fa-bold" aria-hidden="true"></i>
         </div>
-        <div className={italic.className} onMouseDown={this._toggleInlineStyle.bind(this, italic.style)}>
+        <div className={italic.className} onMouseDown={this._toggleInlineStyle.call(this, italic.style)}>
           <i className="fa fa-italic" aria-hidden="true"></i>
         </div>
-        <div className={underline.className} onMouseDown={this._toggleInlineStyle.bind(this, underline.style)}>
+        <div className={underline.className} onMouseDown={this._toggleInlineStyle.call(this, underline.style)}>
           <i className="fa fa-underline" aria-hidden="true"></i>
         </div>
         <div className="inline-style__color">
@@ -178,13 +191,13 @@ class Heading extends React.Component {
 
     return (
       <div className="font-style group-control">
-        <div className={blockquote.className} onMouseDown={this._toggleBlockType.bind(this, blockquote.style)}>
+        <div className={blockquote.className} onMouseDown={this._toggleBlockType.call(this, blockquote.style)}>
           <i className="fa fa-quote-left" aria-hidden="true"></i>
         </div>
-        <div className={unorderList.className} onMouseDown={this._toggleBlockType.bind(this, unorderList.style)}>
+        <div className={unorderList.className} onMouseDown={this._toggleBlockType.call(this, unorderList.style)}>
           <i className="fa fa-list-ul" aria-hidden="true"></i>
         </div>
-        <div className={orderList.className} onMouseDown={this._toggleBlockType.bind(this, orderList.style)}>
+        <div className={orderList.className} onMouseDown={this._toggleBlockType.call(this, orderList.style)}>
           <i className="fa fa-list-ol" aria-hidden="true"></i>
         </div>
       </div>

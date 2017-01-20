@@ -18693,12 +18693,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(Heading, [{
 	    key: '_toggleBlockType',
 	    value: function _toggleBlockType(style) {
-	      this.props.toggleBlockType(style);
+	      var _this2 = this;
+
+	      return function (e) {
+	        e.preventDefault();
+	        _this2.props.toggleBlockType(style);
+	      };
 	    }
 	  }, {
 	    key: '_toggleInlineStyle',
 	    value: function _toggleInlineStyle(style) {
-	      this.props.toggleInlineStyle(style);
+	      var _this3 = this;
+
+	      return function (e) {
+	        e.preventDefault();
+	        _this3.props.toggleInlineStyle(style);
+	      };
 	    }
 	  }, {
 	    key: '_selectHeading',
@@ -18712,30 +18722,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: '_changeHeading',
-	    value: function _changeHeading() {
+	    value: function _changeHeading(e) {
+	      e.preventDefault();
 	      this.setState({ focusHeadingSelect: !this.state.focusHeadingSelect });
 	    }
 	  }, {
 	    key: '_selectColor',
-	    value: function _selectColor() {
+	    value: function _selectColor(e) {
+	      e.preventDefault();
 	      this.setState({ focusColorPicker: !this.state.focusColorPicker });
 	    }
 	  }, {
 	    key: '_changeColorComplete',
 	    value: function _changeColorComplete(color) {
-	      var colorHex = color.hex,
-	          colorCode = colorHex.substring(1);
+	      var _this4 = this;
 
-	      this.setState({
-	        colorSelected: colorHex,
-	        focusColorPicker: !this.state.focusColorPicker
-	      });
-	      this.props.toggleColor(colorCode);
+	      return function (e) {
+	        e.preventDefault();
+	        var colorHex = color.hex,
+	            colorCode = colorHex.substring(1);
+
+	        _this4.setState({
+	          colorSelected: colorHex,
+	          focusColorPicker: !_this4.state.focusColorPicker
+	        });
+	        _this4.props.toggleColor(colorCode);
+	      };
 	    }
 	  }, {
 	    key: '_renderTextHeading',
 	    value: function _renderTextHeading(blockStyle) {
-	      var _this2 = this;
+	      var _this5 = this;
 
 	      var options = null,
 	          headingSelected = void 0,
@@ -18759,7 +18776,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return _react2.default.createElement(
 	          'div',
-	          { key: index, onMouseDown: _this2._selectHeading.bind(_this2, type), className: 'heading-item ' + type.style },
+	          { key: index, onMouseDown: _this5._selectHeading.bind(_this5, type), className: 'heading-item ' + type.style },
 	          _react2.default.createElement(
 	            'span',
 	            { className: type.style },
@@ -18822,7 +18839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _react2.default.createElement(_reactColor.CirclePicker, {
 	            width: '294px',
 	            colors: _styleConfig.COLORS_PICKER,
-	            onChangeComplete: this._changeColorComplete.bind(this) })
+	            onChangeComplete: this._changeColorComplete.call(this) })
 	        );
 	      }
 
@@ -18831,17 +18848,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        { className: 'inline-style group-control' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: bold.className, onMouseDown: this._toggleInlineStyle.bind(this, bold.style) },
+	          { className: bold.className, onMouseDown: this._toggleInlineStyle.call(this, bold.style) },
 	          _react2.default.createElement('i', { className: 'fa fa-bold', 'aria-hidden': 'true' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: italic.className, onMouseDown: this._toggleInlineStyle.bind(this, italic.style) },
+	          { className: italic.className, onMouseDown: this._toggleInlineStyle.call(this, italic.style) },
 	          _react2.default.createElement('i', { className: 'fa fa-italic', 'aria-hidden': 'true' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: underline.className, onMouseDown: this._toggleInlineStyle.bind(this, underline.style) },
+	          { className: underline.className, onMouseDown: this._toggleInlineStyle.call(this, underline.style) },
 	          _react2.default.createElement('i', { className: 'fa fa-underline', 'aria-hidden': 'true' })
 	        ),
 	        _react2.default.createElement(
@@ -18881,17 +18898,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        { className: 'font-style group-control' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: blockquote.className, onMouseDown: this._toggleBlockType.bind(this, blockquote.style) },
+	          { className: blockquote.className, onMouseDown: this._toggleBlockType.call(this, blockquote.style) },
 	          _react2.default.createElement('i', { className: 'fa fa-quote-left', 'aria-hidden': 'true' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: unorderList.className, onMouseDown: this._toggleBlockType.bind(this, unorderList.style) },
+	          { className: unorderList.className, onMouseDown: this._toggleBlockType.call(this, unorderList.style) },
 	          _react2.default.createElement('i', { className: 'fa fa-list-ul', 'aria-hidden': 'true' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: orderList.className, onMouseDown: this._toggleBlockType.bind(this, orderList.style) },
+	          { className: orderList.className, onMouseDown: this._toggleBlockType.call(this, orderList.style) },
 	          _react2.default.createElement('i', { className: 'fa fa-list-ol', 'aria-hidden': 'true' })
 	        )
 	      );
