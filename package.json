@@ -19,7 +19,7 @@
   "repository": "KhueHuynh/react-text-editor",
   "license": "BSD-3-Clause",
   "scripts": {
-    "build": "webpack --config webpack.config.js --progress --colors"
+    "prepublish": "webpack --config webpack.config.js --progress --colors"
   },
   "dependencies": {
     "immutable": "~3.7.4",

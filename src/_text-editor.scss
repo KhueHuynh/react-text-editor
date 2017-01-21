@@ -161,6 +161,12 @@
       margin: 0 !important;
       margin-top: 0 !important;
     }
+    // this class wrapper placeholder element. The class is defined by draft. CANOT CHANGE
+    .public-DraftEditorPlaceholder-root {
+      color: #9197a3;
+      position: absolute;
+      z-index: 0;
+    }
   }
   &.readonly {
     .text-editor-wrapper {
