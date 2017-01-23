@@ -10,16 +10,15 @@
   "homepage": "https://github.com/KhueHuynh/react-text-editor",
   "bugs": "https://github.com/KhueHuynh/react-text-editor/issues",
   "files": [
-    "dist/",
     "src/",
-    "LICENSE",
-    "PATENTS"
+    "README.md",
+    "webapck.config.js"
   ],
   "main": "dist/editor.js",
   "repository": "KhueHuynh/react-text-editor",
   "license": "BSD-3-Clause",
   "scripts": {
-    "prepublish": "webpack --config webpack.config.js --progress --colors"
+    "postinstall": "webpack --config webpack.config.js --progress --colors"
   },
   "dependencies": {
     "immutable": "~3.7.4",
