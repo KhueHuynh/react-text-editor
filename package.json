@@ -14,11 +14,11 @@
     "README.md",
     "webapck.config.js"
   ],
-  "main": "dist/editor.js",
+  "main": "src/editor.jsx",
   "repository": "KhueHuynh/react-text-editor",
   "license": "BSD-3-Clause",
   "scripts": {
-    "postinstall": "webpack --progress --colors"
+    "build": "webpack"
   },
   "dependencies": {
     "immutable": "~3.7.4",
