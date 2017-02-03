@@ -13,6 +13,7 @@ It have some basic control: heading, font style(italic, bolde, underline, clor),
 ## Use
 
 	import Editor from 'react-text-editor';
+	This package is use es6 syntax. Need to config in your system to build
 
 ## Props:
 - value: {string}

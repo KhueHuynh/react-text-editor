@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { CirclePicker } from 'react-color';
-import { TEXT_HEADING_STYLES, FONT_STYLES, INLINE_STYLES, COLORS_PICKER, LIST_COLORS } from './styleConfig'
+import { TEXT_HEADING_STYLES, FONT_STYLES, INLINE_STYLES, COLORS_PICKER, LIST_COLORS } from './styleConfig';
+import ColorPicker from './colorPicker.jsx';
 
 
 class Heading extends React.Component {
@@ -65,18 +66,14 @@ class Heading extends React.Component {
     this.setState({ focusColorPicker: !this.state.focusColorPicker });
   }
 
-  _changeColorComplete(color) {
-    return (e) => {
-      e.preventDefault();
-      let colorHex = color.hex,
-        colorCode = colorHex.substring(1);
+  _changeColor(color) {
+    let colorHex = '#' + color;
 
-      this.setState({
-        colorSelected: colorHex,
-        focusColorPicker: !this.state.focusColorPicker
-      });
-      this.props.toggleColor(colorCode);
-    }
+    this.setState({
+      colorSelected: colorHex,
+      focusColorPicker: !this.state.focusColorPicker
+    });
+    this.props.toggleColor(color);
   }
 
   _renderTextHeading(blockStyle) {
@@ -146,10 +143,7 @@ class Heading extends React.Component {
       colorPicker = (
         <div className="inline-style__color-picker-wrapper">
           <div className="editor-heading-overlay" onMouseDown={this._selectColor.bind(this)}></div>
-          <CirclePicker
-            width="294px"
-            colors={COLORS_PICKER}
-            onChangeComplete={this._changeColorComplete.call(this)}/>
+          <ColorPicker onToggle={this._changeColor.bind(this)}/>
         </div>
       );
     }

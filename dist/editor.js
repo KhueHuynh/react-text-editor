@@ -18665,6 +18665,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _styleConfig = __webpack_require__(144);
 
+	var _colorPicker = __webpack_require__(384);
+
+	var _colorPicker2 = _interopRequireDefault(_colorPicker);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18733,26 +18737,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ focusColorPicker: !this.state.focusColorPicker });
 	    }
 	  }, {
-	    key: '_changeColorComplete',
-	    value: function _changeColorComplete(color) {
-	      var _this4 = this;
+	    key: '_changeColor',
+	    value: function _changeColor(color) {
+	      var colorHex = '#' + color;
 
-	      return function (e) {
-	        e.preventDefault();
-	        var colorHex = color.hex,
-	            colorCode = colorHex.substring(1);
-
-	        _this4.setState({
-	          colorSelected: colorHex,
-	          focusColorPicker: !_this4.state.focusColorPicker
-	        });
-	        _this4.props.toggleColor(colorCode);
-	      };
+	      this.setState({
+	        colorSelected: colorHex,
+	        focusColorPicker: !this.state.focusColorPicker
+	      });
+	      this.props.toggleColor(color);
 	    }
 	  }, {
 	    key: '_renderTextHeading',
 	    value: function _renderTextHeading(blockStyle) {
-	      var _this5 = this;
+	      var _this4 = this;
 
 	      var options = null,
 	          headingSelected = void 0,
@@ -18776,7 +18774,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return _react2.default.createElement(
 	          'div',
-	          { key: index, onMouseDown: _this5._selectHeading.bind(_this5, type), className: 'heading-item ' + type.style },
+	          { key: index, onMouseDown: _this4._selectHeading.bind(_this4, type), className: 'heading-item ' + type.style },
 	          _react2.default.createElement(
 	            'span',
 	            { className: type.style },
@@ -18836,10 +18834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'div',
 	          { className: 'inline-style__color-picker-wrapper' },
 	          _react2.default.createElement('div', { className: 'editor-heading-overlay', onMouseDown: this._selectColor.bind(this) }),
-	          _react2.default.createElement(_reactColor.CirclePicker, {
-	            width: '294px',
-	            colors: _styleConfig.COLORS_PICKER,
-	            onChangeComplete: this._changeColorComplete.call(this) })
+	          _react2.default.createElement(_colorPicker2.default, { onToggle: this._changeColor.bind(this) })
 	        );
 	      }
 
@@ -31745,6 +31740,90 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = (0, _common.ColorWrap)(Twitter);
+
+/***/ },
+/* 384 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(2);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _styleConfig = __webpack_require__(144);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ColorPicker = function (_React$Component) {
+	  _inherits(ColorPicker, _React$Component);
+
+	  function ColorPicker(props) {
+	    _classCallCheck(this, ColorPicker);
+
+	    return _possibleConstructorReturn(this, (ColorPicker.__proto__ || Object.getPrototypeOf(ColorPicker)).call(this, props));
+	  }
+
+	  _createClass(ColorPicker, [{
+	    key: '_onToggle',
+	    value: function _onToggle(color) {
+	      var _this2 = this;
+
+	      return function (e) {
+	        e.preventDefault();
+	        var colorCode = color.substring(1);
+	        _this2.props.onToggle(colorCode);
+	      };
+	    }
+	  }, {
+	    key: '_renderColorList',
+	    value: function _renderColorList() {
+	      var _this3 = this;
+
+	      var colorArray = [];
+	      _styleConfig.COLORS_PICKER.map(function (type, index) {
+	        var style = { backgroundColor: _styleConfig.COLORS_PICKER[index] };
+	        colorArray.push(_react2.default.createElement('span', { className: 'color-picker__color', key: index, style: style, onMouseDown: _this3._onToggle.call(_this3, _styleConfig.COLORS_PICKER[index]) }));
+	      });
+	      return colorArray;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var colorList = this._renderColorList();
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'color-picker__wrapper' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'color-picker__picker' },
+	          colorList
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ColorPicker;
+	}(_react2.default.Component);
+
+	exports.default = ColorPicker;
 
 /***/ }
 /******/ ])
