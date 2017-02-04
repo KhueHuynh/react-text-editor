@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { CirclePicker } from 'react-color';
 import { TEXT_HEADING_STYLES, FONT_STYLES, INLINE_STYLES, COLORS_PICKER, LIST_COLORS } from './styleConfig';
 import ColorPicker from './colorPicker.jsx';
 
