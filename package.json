@@ -10,11 +10,12 @@
   "homepage": "https://github.com/KhueHuynh/react-text-editor",
   "bugs": "https://github.com/KhueHuynh/react-text-editor/issues",
   "files": [
+    "dist/",
     "src/",
     "README.md",
     "webapck.config.js"
   ],
-  "main": "src/editor.jsx",
+  "main": "dist/editor.js",
   "repository": "KhueHuynh/react-text-editor",
   "license": "BSD-3-Clause",
   "scripts": {
