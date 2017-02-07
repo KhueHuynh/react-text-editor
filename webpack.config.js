@@ -2,6 +2,27 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var loaders = [
+  {
+    test: /\.jsx?$/,
+    loader: 'babel-loader',
+    include: path.join(__dirname, 'src'),
+    query: {
+      cacheDirectory: true,
+      presets: ['es2015', 'stage-0', 'react'],
+      plugins: ['transform-decorators-legacy']
+    }
+  },
+  {
+    test: /\.scss$/,
+    loader: ExtractTextPlugin.extract('css!sass')
+  },
+  {
+    test: /[\/\\]node_modules[\/\\]draft-js[\/\\]lib[\/\\](getDraftEditorSelection||editOnSelect||setDraftEditorSelection)\.js$/,
+    loader: 'imports?global=>GLOBAL'
+  }
+];
+
 module.exports = {
   entry: {
     editor: "./src/editor.jsx",
@@ -13,22 +34,7 @@ module.exports = {
     modulesDirectories: ['node_modules', '.']
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, 'src'),
-        query: {
-          cacheDirectory: true,
-          presets: ['es2015', 'stage-0', 'react'],
-          plugins: ['transform-decorators-legacy']
-        }
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
-      }
-    ]
+    loaders: loaders
   },
   externals: {
     'react': 'react',
@@ -44,6 +50,9 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('style.css', {
       allChunks: true
+    }),
+    new webpack.DefinePlugin({
+      GLOBAL: '(typeof window !== "undefined") ? window : {}'
     })
   ]
 };
