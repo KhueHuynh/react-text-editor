@@ -14477,7 +14477,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {/**
+	/*** IMPORTS FROM imports-loader ***/
+	var global = ((typeof window !== "undefined") ? window : {});
+
+	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -14521,7 +14524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = editOnBlur;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
 
 /***/ },
 /* 92 */

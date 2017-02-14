@@ -18,7 +18,7 @@ var loaders = [
     loader: ExtractTextPlugin.extract('css!sass')
   },
   {
-    test: /[\/\\]node_modules[\/\\]draft-js[\/\\]lib[\/\\](getDraftEditorSelection||editOnSelect||setDraftEditorSelection)\.js$/,
+    test: /[\/\\]node_modules[\/\\]draft-js[\/\\]lib[\/\\](getDraftEditorSelection||editOnSelect||setDraftEditorSelection||editOnBlur)\.js$/,
     loader: 'imports?global=>GLOBAL'
   }
 ];
