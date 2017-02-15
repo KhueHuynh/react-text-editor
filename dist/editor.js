@@ -14813,7 +14813,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {/**
+	/*** IMPORTS FROM imports-loader ***/
+	var global = ((typeof window !== "undefined") ? window : {});
+
+	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -14955,7 +14958,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = editOnInput;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
 
 /***/ },
 /* 100 */
@@ -15232,7 +15235,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {/**
+	/*** IMPORTS FROM imports-loader ***/
+	var global = ((typeof window !== "undefined") ? window : {});
+
+	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -15275,7 +15281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = keyCommandBackspaceToStartOfLine;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
 
 /***/ },
 /* 104 */
@@ -17422,9 +17428,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*** IMPORTS FROM imports-loader ***/
-	var global = ((typeof window !== "undefined") ? window : {});
-
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
@@ -17464,7 +17467,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = editOnSelect;
-
 
 /***/ },
 /* 129 */
@@ -18512,6 +18514,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/*** IMPORTS FROM imports-loader ***/
+	var global = ((typeof window !== "undefined") ? window : {});
+
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
@@ -18559,6 +18564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = getVisibleSelectionRect;
+
 
 /***/ },
 /* 143 */
