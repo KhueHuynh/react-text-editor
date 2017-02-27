@@ -159,6 +159,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return data;
 	    }
 	  }, {
+	    key: 'hasText',
+	    value: function hasText() {
+	      return this.state.editorState.getCurrentContent().hasText();
+	    }
+	  }, {
 	    key: '_handleKeyCommand',
 	    value: function _handleKeyCommand(command) {
 	      var editorState = this.state.editorState,

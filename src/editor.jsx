@@ -74,6 +74,10 @@ class Editor extends React.Component {
     return data;
   }
 
+  hasText() {
+    return this.state.editorState.getCurrentContent().hasText();
+  }
+
   _handleKeyCommand(command) {
     let { editorState } = this.state,
         newState = RichUtils.handleKeyCommand(editorState, command);
