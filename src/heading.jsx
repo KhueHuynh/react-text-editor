@@ -20,14 +20,18 @@ class Heading extends React.Component {
     toggleInlineStyle: React.PropTypes.func.isRequired,
     toggleBlockType: React.PropTypes.func.isRequired,
     toggleColor: React.PropTypes.func.isRequired,
-    editorState: React.PropTypes.object.isRequired
+    editorState: React.PropTypes.object.isRequired,
+    showImportImage: React.PropTypes.bool,
+    importImageCallback: React.PropTypes.func
   }
 
   static defaultProps = {
     toggleInlineStyle: () => {},
     toggleBlockType: () => {},
     toggleColor: () => {},
-    editorState: {}
+    editorState: {},
+    showImportImage: false,
+    importImageCallback: () => {}
   }
 
   _toggleBlockType(style) {
@@ -197,16 +201,31 @@ class Heading extends React.Component {
     );
   }
 
+  _importImageClick(e) {
+    e.preventDefault();
+    this.prop.importImageCallback();
+  }
+
   render() {
     let { editorState } = this.props,
         selection = editorState.getSelection(),
         blockType = editorState
           .getCurrentContent()
           .getBlockForKey(selection.getStartKey())
-          .getType();
-    let heading = this._renderTextHeading(blockType),
+          .getType(),
+        heading = this._renderTextHeading(blockType),
         fontStyle = this._renderFontStyle(blockType),
-        inlineStyle = this._renderInlineStyle();
+        inlineStyle = this._renderInlineStyle(),
+        importImageIcon = null;
+
+    if (this.props.showImportImage) {
+      importImageIcon = (
+        <button className="editor-heading-import-image"
+          onClick={this._importImageClick}>
+          <i class="fa fa-picture-o" aria-hidden="true"></i>
+        </button>
+      );
+    }
 
     return (
       <div className="editor-heading">
@@ -214,6 +233,8 @@ class Heading extends React.Component {
         {heading}
 
         {inlineStyle}
+
+        {importImageIcon}
 
         {fontStyle}
 

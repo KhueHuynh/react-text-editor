@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { Editor as DraftEditor, EditorState, RichUtils, Modifier, convertToRaw, convertFromRaw, CompositeDecorator } from 'draft-js';
 import { COLOR_CONFIG_EDITOR, LIST_COLORS } from './styleConfig';
 import Heading from './heading.jsx';
+import ImportImagePopup from './importImagePopup.jsx';
 
 const decorator = new CompositeDecorator([
   {
@@ -38,7 +39,15 @@ class Editor extends React.Component {
     }
 
 
-    this.state = { editorState: editorStateInit };
+    this.state = {
+      editorState: editorStateInit,
+      imageUploadeds: {},
+      listUploadings: [],
+      showImageImportPopup: false
+    };
+
+    //the last index file added.
+    this.lastImageIndex = 0;
 
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => this.setState({ editorState: editorState });
@@ -53,13 +62,17 @@ class Editor extends React.Component {
   static propTypes = {
     value: React.PropTypes.string,
     placeholder: React.PropTypes.string,
-    readOnly: React.PropTypes.bool
+    readOnly: React.PropTypes.bool,
+    uploadImageFunc: React.PropTypes.func,
+    showImageImport: React.PropTypes.bool
   }
 
   static defaultProps = {
     value: undefined,
-    placeholder: 'Tell me ...',
-    readOnly: false
+    placeholder: '',
+    readOnly: false,
+    uploadImageFunc: () => {},
+    showImageImport: false
   }
 
   getValue() {
@@ -156,11 +169,96 @@ class Editor extends React.Component {
     this.onChange(nextEditorState);
   }
 
+  /**
+  * Image uploaded successfully.
+  *
+  * @param payload {object}. Ex: {index: ,link}
+  */
+  _uploadSuccess(payload) {
+    let listUploadings = this.state.listUploadings,
+        imageUploadeds = this.props.imageUploadeds,
+        imageIndex = payload.index,
+        index = listUploadings.indexOf(imageIndex);
+
+    if (index > -1) {
+      if (imageUploadeds[index]) {
+        imageUploadeds[index].link = payload.link;
+      }
+      listUploadings.splice(index, 1);
+      this.setSate({
+        listUploadings: listUploadings,
+        imageUploadeds: imageUploadeds
+      });
+    }
+  }
+
+  _showImagePopup() {
+    let newState = !this.props.showImageImportPopup;
+
+    this.setState({showImageImportPopup: newState});
+  }
+
+  /**
+  * Upload image;
+  *
+  * @param image {object} -- A file is add by react-dropzone
+  */
+  _uploadImage(image) {
+    let listUploadings = this.state.listUploadings,
+        imageUploadeds = this.state.imageUploadeds,
+        index = this.lastImageIndex;
+    //add image to preview
+    imageUploadeds[index] = {preview: image.preview};
+    listUploadings.push(index);
+    this.lastImageIndex++;
+
+    this.setState({
+      listUploadings: listUploadings,
+      imageUploadeds: imageUploadeds
+    });
+
+    this.props.uploadImageFunc({
+      index: index,
+      file: image
+    });
+  }
+
+  /**
+  * Add image
+  *
+  * @param urlValue {string} -- image link
+  */
+  _selectImageLink(urlValue) {
+    let {editorState, urlValue, urlType} = this.state,
+        contentState = editorState.getCurrentContent(),
+        contentStateWithEntity = contentState.createEntity(
+            'image',
+            'IMMUTABLE',
+            {src: urlValue}
+          ),
+        entityKey = contentStateWithEntity.getLastCreatedEntityKey(),
+        newEditorState = EditorState.set(
+          editorState,
+          {currentContent: contentStateWithEntity}
+        );
+
+    this.setState({
+      editorState: AtomicBlockUtils.insertAtomicBlock(
+        newEditorState,
+        entityKey,
+        ' '
+      )
+    }, () => {
+      setTimeout(() => this.focus(), 0);
+    });
+  }
+
   render() {
     let { editorState } = this.state,
         { readOnly, placeholder } = this.props,
         heading = null,
-        classWrapperComponent='text-editor readonly';
+        classWrapperComponent='text-editor readonly',
+        importImagePopup = null;
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
@@ -178,9 +276,20 @@ class Editor extends React.Component {
           toggleInlineStyle={this.toggleInlineStyle}
           toggleBlockType={this.toggleBlockType}
           toggleColor={this.toggleColor}
-          editorState={this.state.editorState}/>
+          editorState={this.state.editorState}
+          showImageImport={this.props.showImportImage}
+          importImageCallback={this._showImagePopup.bind(this)}/>
       );
       classWrapperComponent = 'text-editor';
+    }
+
+    if (this.state.showImageImportPopup) {
+      importImagePopup = (
+        <ImportImagePopup
+          imageUploadeds={this.state.imageUploadeds},
+          uploadImage={this._uploadImage.bind(this)}
+          importImage={this._selectImageLink.bind(this)}/>
+      );
     }
 
     return (
@@ -201,6 +310,9 @@ class Editor extends React.Component {
             ref="editor"
             spellCheck={true}/>
         </div>
+
+        {importImagePopup}
+
       </div>
     );
   }
