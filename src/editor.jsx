@@ -68,6 +68,7 @@ class Editor extends React.Component {
         data = '';
 
     if (rawData) {
+      rawData.entityMap = {};
       data = JSON.stringify(rawData);
     }
 

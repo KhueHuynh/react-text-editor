@@ -153,6 +153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          data = '';
 
 	      if (rawData) {
+	        rawData.entityMap = {};
 	        data = JSON.stringify(rawData);
 	      }
 
